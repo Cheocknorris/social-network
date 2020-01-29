@@ -126,7 +126,6 @@ app.post("/reset/start", (req, res) => {
     let recipient = email;
     let message = "Your secret code: " + secretCode;
     let subject = "Social Network secret code";
-    cookie = req.session;
     console.log("req.body: ", req.body);
     console.log("secretCode: ", secretCode);
     console.log("message: ", message);
@@ -151,37 +150,76 @@ app.post("/reset/start", (req, res) => {
             console.log("err: ", err);
             res.json({ success: false });
         });
-
-
-    // db
-    //     .getUsersEmail(email)
-    //     .then(results => {
-    //         console.log("results: ", results);
-    //         if (results.rows.length > 0) {
-    //             bcrypt
-    //                 .compare(password, results.rows[0].hashedpass)
-    //                 .then(comparison => {
-    //                     console.log("comparison:", comparison);
-    //                     if (comparison) {
-    //                         cookie.userId = results.rows[0].id;
-    //                         res.json({ success: true });
-    //                     } else {
-    //                         console.log("comparison failed");
-    //                         res.json({ success: false });
-    //                     }
-    //                 });
-    //         } else {
-    //             console.log("email not found");
-    //             res.json({ success: false });
-    //         }
-    //     })
-    //     .catch(err => {
-    //         console.log("err: ", err);
-    //         res.json({ success: false });
-    //     });
 });
 
-// this route must always must be the last one
+app.post("/reset/update", (req, res) => {
+    console.log("req.body in /reset/start: ", req.body);
+    let email = req.body.email;
+    let code = req.body.secretCode;
+    let password = req.body.newPassword;
+    let hashedPass;
+
+    db
+        .getCode(email)
+        .then(results => {
+            console.log("results from getCode: ", results);
+            if (!results.length > 0) {
+                console.log("email not found");
+                res.json({ success: false });
+            } else {
+                console.log("code from results: ", results[0].code);
+                if (results[0].code !== code) {
+                    console.log("code doesn't match");
+                    res.json({ success: false });
+                } else {
+                    bcrypt
+                        .hash(password)
+                        .then(hashPass => {
+                            console.log("hashPass: ", hashPass);
+                            hashedPass = hashPass;
+                            return hashedPass;
+                        })
+                        .then(hash => {
+                            res.json({ success: true });
+                            console.log(hash);
+                            return db.updateUsersPass(email, hashedPass);
+                        })
+                        .catch(err => {
+                            console.log("err: ", err);
+                            res.json({ success: false });
+                        });
+                }
+            }
+        });
+});
+//
+//
+//         if (results[0].code === code) {
+//             bcrypt
+//                 .hash(password)
+//                 .then(hashPass => {
+//                     console.log("hashPass: ", hashPass);
+//                     hashedPass = hashPass;
+//                     return hashedPass;
+//                 })
+//                 .then(hash => {
+//                 console.log(hash);
+//                 return db.updateUsersPass(email, hashedPass);
+//                 res.json({ success: true });
+//             })
+//             .catch(err => {
+//                             console.log("err: ", err);
+//                             res.json({ success: false });
+//                         });
+//                 } else {
+//                         console.log("code doesn't match");
+//                         res.json({ success: false });
+//                 } else {
+//                 //     console.log("email not found");
+//                 //     res.json({ success: false });
+//                 // }
+
+// this route must always be the last one
 
 app.get("*", function(req, res) {
     if (!req.session.userId) {

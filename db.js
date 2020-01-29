@@ -21,7 +21,26 @@ exports.getUsersEmail = function(email) {
 exports.addCode = function(email, code) {
     return db.query(
         `INSERT INTO codes (email, code)
-         VALUES ($1, $2)`,
+         VALUES ($1, $2)
+         ON CONFLICT (email)
+         DO UPDATE SET code =$2`,
         [email, code]
+    );
+};
+
+exports.getCode = function(email) {
+    return db.query(
+        `SELECT code FROM codes WHERE email=$1`,
+        [email]
+    )
+        .then(({ rows }) => rows);
+};
+
+exports.updateUsersPass = function(email, hashedPass) {
+    return db.query(
+        `UPDATE users
+        hashedPass = $2
+        WHERE email = $1`,
+        [email, hashedPass]
     );
 };
