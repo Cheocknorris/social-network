@@ -4,6 +4,7 @@ const compression = require("compression");
 const cookieSession = require("cookie-session");
 const db = require("./db");
 const bcrypt = require("./bcrypt");
+const csurf = require("csurf");
 let cookie;
 
 app.use(compression());
@@ -18,6 +19,13 @@ app.use(
         maxAge: 1000 * 60 * 60 * 24 * 14
     })
 );
+
+app.use(csurf());
+
+app.use(function(req, res, next){
+    res.cookie('mytoken', req.csrfToken());
+    next();
+});
 
 if (process.env.NODE_ENV != "production") {
     app.use(
@@ -74,6 +82,41 @@ app.post("/register", function(req, res) {
             res.json({ success: false });
         });
 });
+
+app.post("/login", (req, res) => {
+    let email = req.body.email;
+    let password = req.body.password;
+    cookie = req.session;
+
+    db
+        .getUsersEmail(email)
+        .then(results => {
+            console.log("results: ", results);
+            if (results.rows.length > 0) {
+                bcrypt
+                    .compare(password, results.rows[0].hashedpass)
+                    .then(comparison => {
+                        console.log("comparison:", comparison);
+                        if (comparison) {
+                            cookie.userId = results.rows[0].id;
+                            res.json({ success: true });
+                        } else {
+                            console.log("comparison failed");
+                            res.json({ success: false });
+                        }
+                    });
+            } else {
+                console.log("email not found");
+                res.json({ success: false });
+            }
+        })
+        .catch(err => {
+            console.log("err: ", err);
+            res.json({ success: false });
+        });
+});
+
+
 
 // this route must always must be the last one
 

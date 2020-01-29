@@ -13,3 +13,7 @@ exports.addUsers = function(first, last, email, hashedPass) {
         [first, last, email, hashedPass]
     );
 };
+
+exports.getUsersEmail = function(email) {
+    return db.query(`SELECT * FROM users WHERE email=$1`, [email]);
+};

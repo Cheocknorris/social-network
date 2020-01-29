@@ -1,13 +1,17 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import Welcome from "./welcome";
+import Login from "./login";
 
 let elem;
 
 // const isLoggedIn = location.pathname != "welcome";
 if (location.pathname == "/welcome") {
     elem = <Welcome />;
-} else {
+} else if (location.pathname == "/login") {
+    elem = <Login />;
+}
+else {
     elem = <h1>Logo</h1>;
 }
 
