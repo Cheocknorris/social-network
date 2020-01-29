@@ -140,6 +140,12 @@ app.post("/reset/start", (req, res) => {
             if (results.rows.length > 0) {
                 ses.
                     sendEmail(recipient, message, subject);
+                db.
+                    addCode(email, secretCode);
+                res.json({ success: true });
+            } else {
+                console.log("email not found");
+                res.json({ success: false });
             }
         }).catch(err => {
             console.log("err: ", err);

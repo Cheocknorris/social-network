@@ -17,3 +17,11 @@ exports.addUsers = function(first, last, email, hashedPass) {
 exports.getUsersEmail = function(email) {
     return db.query(`SELECT * FROM users WHERE email=$1`, [email]);
 };
+
+exports.addCode = function(email, code) {
+    return db.query(
+        `INSERT INTO codes (email, code)
+         VALUES ($1, $2)`,
+        [email, code]
+    );
+};

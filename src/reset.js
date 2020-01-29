@@ -6,7 +6,12 @@ import { Link } from 'react-router-dom';
 export default class Reset extends React.Component {
     constructor(props) {
         super(props);
-        this.state = { step: 1 };
+        this.state = {
+            step: 1,
+            email: '',
+            newPassword: '',
+            secretCode: ''
+        };
     }
     handleChange(e) {
         this.setState({
