@@ -255,6 +255,9 @@ app.post("/upload", uploader.single("file"), s3.upload, (req, res) => {
     db.
         updateProfilePic(id, imageUrl).then(results => {
             console.log("upload results", results);
+            res.json({
+                newPic: imageUrl
+            });
         })
         .catch(err => {
             console.log("error in upload", err);

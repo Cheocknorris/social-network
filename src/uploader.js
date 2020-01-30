@@ -12,7 +12,8 @@ export default class Uploader extends React.Component {
             file: e.target.files[0]
         });
     }
-    upload() {
+    upload(e) {
+        e.preventDefault();
         console.log("upload button clicked");
         console.log("imageUrl: ", this.state.file);
         let formData = new FormData();
@@ -21,7 +22,12 @@ export default class Uploader extends React.Component {
 
         axios.post("/upload",
             formData
-        );
+        ).then ( results => {
+            console.log("results:", results);
+
+            this.props.setImageUrl(results.data.newPic);
+
+        });
     }
     render() {
         return (
@@ -30,7 +36,7 @@ export default class Uploader extends React.Component {
                 <form>
                     <input name="file" type="file" onChange={e => this.handleChange(e)}/>
                 </form>
-                <button onClick={e => this.upload()}>Upload</button>
+                <button onClick={e => this.upload(e)}>Upload</button>
             </div>
         );
     }
