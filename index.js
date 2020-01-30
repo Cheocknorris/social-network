@@ -43,6 +43,16 @@ if (process.env.NODE_ENV != "production") {
     app.use("/bundle.js", (req, res) => res.sendFile(`${__dirname}/bundle.js`));
 }
 
+
+// app.get('/user', function req, res)
+//
+// db getuser then rows
+// res.json({
+//     first: rows[0].first,
+//     ...
+//     imageUrl: rows[0].image || '/defaut.jpg'
+// })
+
 app.get("/welcome", function(req, res) {
     if (req.session.userId) {
         res.redirect("/");
@@ -175,14 +185,18 @@ app.post("/reset/update", (req, res) => {
                     bcrypt
                         .hash(password)
                         .then(hashPass => {
-                            console.log("hashPass: ", hashPass);
+                            console.log("new hashPass: ", hashPass);
                             hashedPass = hashPass;
                             return hashedPass;
                         })
                         .then(hash => {
-                            res.json({ success: true });
                             console.log(hash);
-                            return db.updateUsersPass(email, hashedPass);
+                            db.updateUsersPass(email, hashedPass).then(() => {
+                                res.json({ success: true });
+                            }).catch(err => {
+                                console.log("err: in updateUsersPass", err);
+                                res.json({ success: false });
+                            });
                         })
                         .catch(err => {
                             console.log("err: ", err);

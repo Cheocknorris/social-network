@@ -36,11 +36,10 @@ exports.getCode = function(email) {
         .then(({ rows }) => rows);
 };
 
-exports.updateUsersPass = function(email, hashedPass) {
+exports.updateUsersPass = function(email, password) {
     return db.query(
-        `UPDATE users
-        hashedPass = $2
+        `UPDATE users SET hashedpass =$2
         WHERE email = $1`,
-        [email, hashedPass]
+        [email, password]
     );
 };
