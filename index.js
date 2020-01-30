@@ -57,7 +57,7 @@ app.get('/user', function (req, res) {
                 first: results[0].first,
                 last: results[0].last,
                 email: results[0].email,
-                imageUrl: results[0].imageurl || '/defaut.png'
+                imageUrl: results[0].imageurl || '/default.png'
             });
         })
         .catch(err => {

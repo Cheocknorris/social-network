@@ -1,5 +1,6 @@
 import React from 'react';
 import axios from './axios';
+import ProfilePic from './pic';
 
 export default class App extends React.Component {
     constructor(props) {
@@ -19,6 +20,15 @@ export default class App extends React.Component {
         return (
             <div>
                 <h1>Logo in App</h1>
+                <ProfilePic
+                    clickHandler={
+                        () => this.setState({uploaderIsVisible: true})
+                    }
+                    imageUrl={this.state.imageUrl}
+                    first={this.state.first}
+                    last={this.state.last}
+
+                />
             </div>
         );
     }
