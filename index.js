@@ -44,14 +44,26 @@ if (process.env.NODE_ENV != "production") {
 }
 
 
-// app.get('/user', function req, res)
-//
-// db getuser then rows
-// res.json({
-//     first: rows[0].first,
-//     ...
-//     imageUrl: rows[0].image || '/defaut.jpg'
-// })
+app.get('/user', function (req, res) {
+    let id = req.session.userId;
+    console.log("id", id);
+    db.
+        getUsers(id)
+        .then(results => {
+            console.log("results: ", results);
+            // console.log("first: ", results[0].first);
+            res.json({
+                id: results[0].id,
+                first: results[0].first,
+                last: results[0].last,
+                email: results[0].email,
+                imageUrl: results[0].imageurl || '/defaut.png'
+            });
+        })
+        .catch(err => {
+            console.log("error in get user: ", err);
+        });
+});
 
 app.get("/welcome", function(req, res) {
     if (req.session.userId) {
@@ -208,31 +220,6 @@ app.post("/reset/update", (req, res) => {
 });
 //
 //
-//         if (results[0].code === code) {
-//             bcrypt
-//                 .hash(password)
-//                 .then(hashPass => {
-//                     console.log("hashPass: ", hashPass);
-//                     hashedPass = hashPass;
-//                     return hashedPass;
-//                 })
-//                 .then(hash => {
-//                 console.log(hash);
-//                 return db.updateUsersPass(email, hashedPass);
-//                 res.json({ success: true });
-//             })
-//             .catch(err => {
-//                             console.log("err: ", err);
-//                             res.json({ success: false });
-//                         });
-//                 } else {
-//                         console.log("code doesn't match");
-//                         res.json({ success: false });
-//                 } else {
-//                 //     console.log("email not found");
-//                 //     res.json({ success: false });
-//                 // }
-
 // this route must always be the last one
 
 app.get("*", function(req, res) {

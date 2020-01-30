@@ -13,7 +13,7 @@ if (location.pathname == "/welcome") {
     elem = <Login />;
 }
 else {
-    elem = <h1>Logo</h1>;
+    elem = <App />;
 }
 
 ReactDOM.render(elem, document.querySelector("main"));

@@ -43,3 +43,10 @@ exports.updateUsersPass = function(email, password) {
         [email, password]
     );
 };
+
+exports.getUsers = function(id) {
+    return db.query(
+        `SELECT * FROM users WHERE id=$1`, [id]
+    )
+        .then(({ rows }) => rows);
+};
