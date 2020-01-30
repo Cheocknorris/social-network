@@ -50,3 +50,12 @@ exports.getUsers = function(id) {
     )
         .then(({ rows }) => rows);
 };
+
+exports.updateProfilePic = function(id, imageurl) {
+    return db.query(
+        `UPDATE users SET imageurl = $2
+        WHERE id = $1
+        returning imageurl`,
+        [id, imageurl]
+    ).then(({ rows }) => rows);
+};

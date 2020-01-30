@@ -10,6 +10,8 @@ const cryptoRandomString = require('crypto-random-string');
 const secretCode = cryptoRandomString({
     length: 6
 });
+const s3 = require("./s3");
+const { s3Url } = require("./config");
 let cookie;
 
 app.use(compression());
@@ -17,6 +19,31 @@ app.use(compression());
 app.use(express.json());
 
 app.use(express.static("./public"));
+
+const multer = require("multer");
+const uidSafe = require("uid-safe");
+const path = require("path");
+
+//// boiler plate for image upload. do not touch
+const diskStorage = multer.diskStorage({
+    destination: function(req, file, callback) {
+        callback(null, __dirname + "/uploads");
+    },
+    filename: function(req, file, callback) {
+        uidSafe(24).then(function(uid) {
+            callback(null, uid + path.extname(file.originalname));
+        });
+    }
+});
+
+const uploader = multer({
+    storage: diskStorage,
+    limits: {
+        fileSize: 2097152
+    }
+});
+
+/////////////////////////////////
 
 app.use(
     cookieSession({
@@ -218,7 +245,23 @@ app.post("/reset/update", (req, res) => {
             }
         });
 });
-//
+
+app.post("/upload", uploader.single("file"), s3.upload, (req, res) => {
+    let imageUrl = s3Url + req.file.filename;
+    let id = req.session.userId;
+    console.log("id: ", id);
+    console.log("imageUrl: ", imageUrl);
+
+    db.
+        updateProfilePic(id, imageUrl).then(results => {
+            console.log("upload results", results);
+        })
+        .catch(err => {
+            console.log("error in upload", err);
+        });
+});
+
+
 //
 // this route must always be the last one
 
