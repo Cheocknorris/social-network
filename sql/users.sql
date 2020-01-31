@@ -5,5 +5,6 @@ CREATE TABLE users(
     last VARCHAR NOT NULL CHECK (last != ''),
     email VARCHAR NOT NULL UNIQUE CHECK (email != ''),
     hashedPass VARCHAR NOT NULL CHECK (hashedPass != ''),
-    imageurl VARCHAR(300)
+    imageurl VARCHAR(300),
+    bio TEXT
 );

@@ -84,7 +84,8 @@ app.get('/user', function (req, res) {
                 first: results[0].first,
                 last: results[0].last,
                 email: results[0].email,
-                imageUrl: results[0].imageurl || '/default.png'
+                imageUrl: results[0].imageurl || '/default.png',
+                bio: results[0].bio
             });
         })
         .catch(err => {
@@ -264,6 +265,22 @@ app.post("/upload", uploader.single("file"), s3.upload, (req, res) => {
         });
 });
 
+app.post("/bio", function(req, res) {
+    let id = req.body.id;
+    let bio = req.body.bio;
+    console.log("req.body in bio post", req.body);
+    console.log("id in bio", id);
+    console.log("bio in bio", bio);
+    db.
+        updateBio(id, bio).then(results => {
+            console.log("bio results", results[0].bio);
+            res.json({
+                newBio: results[0].bio
+            });
+        }).catch(err => {
+            console.log("error in bio", err);
+        });
+});
 
 //
 // this route must always be the last one

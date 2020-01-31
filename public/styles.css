@@ -1,0 +1,23 @@
+body {
+    background-color: lightgrey;
+}
+
+header {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid black;
+}
+
+.pp {
+    height: 80px;
+    width: 80px;
+    border-radius: 50%;
+}
+
+.ppcontainer .pp {
+    height: 300px;
+    width: 300px;
+    border-radius: 0;
+}

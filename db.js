@@ -59,3 +59,12 @@ exports.updateProfilePic = function(id, imageurl) {
         [id, imageurl]
     ).then(({ rows }) => rows);
 };
+
+exports.updateBio = function(id, bio) {
+    return db.query(
+        `UPDATE users SET bio = $2
+        WHERE id = $1
+        returning bio`,
+        [id, bio]
+    ).then(({ rows }) => rows);
+};

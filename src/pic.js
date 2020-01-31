@@ -5,12 +5,10 @@ export default function ProfilePic(props) {
     return (
         <div>
             <img
+                className = "pp"
                 src = {props.imageUrl}
                 alt = {props.first + props.last}
-                onClick = {
-                    () => { props.clickHandler();
-                        console.log("pic clicked"); }
-                }
+                onClick = {props.clickHandler}
             />
         </div>
     );
