@@ -42,18 +42,18 @@ export default class BioEditor extends React.Component {
             <div>
 
                 {this.state.error && <div className="error">Something went wrong...</div>}
-                {!this.state.bio && !this.state.editorIsVisible && <div>
-                    <button onClick={e => this.setState({
+                {!this.state.bio && !this.state.editorIsVisible && <div className="bio-editor">
+                    <button className="general-button" onClick={e => this.setState({
                         editorIsVisible: true
                     })}> Add bio </button>
                 </div>}
-                {this.state.editorIsVisible && <div>
+                {this.state.editorIsVisible && <div className="bio-editor">
                     <textarea name="bio" rows="10" cols="50" defaultValue={this.state.bio} onChange={e => this.handleChange(e)}></textarea>
-                    <button onClick={e => this.submitBio()}> Submit </button>
+                    <button className="general-button" onClick={e => this.submitBio()}> Submit </button>
                 </div>}
-                {this.state.bio && !this.state.editorIsVisible && <div>
-                    <h2>{this.state.bio}</h2>
-                    <button onClick={e => this.setState({
+                {this.state.bio && !this.state.editorIsVisible && <div className="bio-editor">
+                    <h2 className="small-text">{this.state.bio}</h2>
+                    <button className="general-button" onClick={e => this.setState({
                         editorIsVisible: true
                     })}> Edit bio </button>
                 </div>}

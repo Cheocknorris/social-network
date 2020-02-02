@@ -5,8 +5,7 @@ import BioEditor from "./bio";
 export default function Profile(props) {
     console.log("props in Profile: ", props);
     return (
-        <div>
-            <h1> {props.first} {props.last}</h1>
+        <div className="profile-container">
             <div className="ppcontainer">
                 <ProfilePic
                     id={props.id}
@@ -15,12 +14,14 @@ export default function Profile(props) {
                     imageUrl={props.imageUrl}
                     clickHandler={props.clickHandler}
                 />
+            </div>
+            <div className="profile-data">
+                <h1 className="general-text"> {props.first} {props.last}</h1>
                 <BioEditor
                     bio={props.bio}
                     id={props.id}
                 />
             </div>
-
         </div>
     );
 }

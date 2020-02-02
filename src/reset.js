@@ -64,25 +64,25 @@ export default class Reset extends React.Component {
         return (
             <div>
                 {this.state.error && <div className="error">Something went wrong...</div>}
-                {this.state.step == 1 && <div>
-                    <h2>Reset passowrd</h2>
-                    <h3>Please enter the email address with which you registered</h3>
-                    <input name="email" placeholder="Email" onChange={e => this.handleChange(e)} />
-                    <button onClick={e => this.startReset()}> Submit </button>
+                {this.state.step == 1 && <div className="reset">
+                    <h2 className="general-text">Reset passowrd</h2>
+                    <h3 className="general-text">Please enter the email address with which you registered</h3>
+                    <input className="general-field" name="email" placeholder="Email" onChange={e => this.handleChange(e)} />
+                    <button className="general-button" onClick={e => this.startReset()}> Submit </button>
                 </div>}
-                {this.state.step == 2 && <div>
-                    <h2>Reset passowrd</h2>
-                    <h3>Please enter the code you received</h3>
-                    <input name="secretCode" placeholder="Secret code" onChange={e => this.handleChange(e)} />
+                {this.state.step == 2 && <div className="reset">
+                    <h2 className="general-text">Reset passowrd</h2>
+                    <h3 className="general-text">Please enter the code you received</h3>
+                    <input className="general-field" name="secretCode" placeholder="Secret code" onChange={e => this.handleChange(e)} />
                     <h3>Please enter a new password</h3>
-                    <input name="newPassword" placeholder="New password" type="password" onChange={e => this.handleChange(e)} />
-                    <button onClick={e => this.setNewPasswrord()}> Submit </button>
+                    <input className="general-field" name="newPassword" placeholder="New password" type="password" onChange={e => this.handleChange(e)} />
+                    <button className="general-button" onClick={e => this.setNewPasswrord()}> Submit </button>
                 </div>}
-                {this.state.step == 3 && <div>
-                    <h2>Reset passowrd</h2>
-                    <h3>Success!</h3>
-                    <p>You can now log in with your new password</p>
-                    <Link to="/login">Log in</Link>
+                {this.state.step == 3 && <div className="reset">
+                    <h2 className="general-text">Reset passowrd</h2>
+                    <h3 className="general-text">Success!</h3>
+                    <p className="general-text">You can now log in with your new password</p>
+                    <Link className="general-link" to="/login">Log in</Link>
                 </div>}
             </div>
         );

@@ -32,13 +32,13 @@ export default class Login extends React.Component {
     }
     render() {
         return (
-            <div>
+            <div className="login">
                 {this.state.error && <div className="error">Something went wrong...</div>}
-                <h2>Please enter your email and password</h2>
-                <input name="email" placeholder="Email" onChange={e => this.handleChange(e)} />
-                <input name="password" placeholder="password" type="password" onChange={e => this.handleChange(e)} />
-                <button onClick={e => this.submit()}> Log in </button>
-                <Link to="/reset">Forgot your password?</Link>
+                <h2 className="general-text">Please enter your email and password</h2>
+                <input className="general-field" name="email" placeholder="Email" onChange={e => this.handleChange(e)} />
+                <input className="general-field" name="password" placeholder="password" type="password" onChange={e => this.handleChange(e)} />
+                <button className="general-button" onClick={e => this.submit()}> Log in </button>
+                <Link className="general-link" to="/reset">Forgot your password?</Link>
             </div>
         );
     }

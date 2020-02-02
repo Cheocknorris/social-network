@@ -8,8 +8,11 @@ import Reset from "./reset";
 
 export default function Welcome() {
     return (
-        <div>
-            <h1> Welcome to Social Network </h1>
+        <div className="welcome">
+            <div className="welcome-logo">
+                <img className="welcome-flag" src="mexico.png" alt=""></img>
+                <h1 className="welcome-text"> Mexicanos en Berlín </h1>
+            </div>
             <div>
                 <HashRouter>
                     <Route exact path="/" component={Registration} />

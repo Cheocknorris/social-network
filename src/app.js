@@ -22,7 +22,10 @@ export default class App extends React.Component {
         return (
             <div>
                 <header>
-                    <h1>Logo in App</h1>
+                    <div className="app-logo">
+                        <img className="app-flag" src="mexico.png" alt=""></img>
+                        <p className="app-welcome-text"> Mexicanos en Berlín </p>
+                    </div>
                     <ProfilePic
                         clickHandler={
                             () => this.setState({uploaderIsVisible: true})
@@ -31,13 +34,13 @@ export default class App extends React.Component {
                         first={this.state.first}
                         last={this.state.last}
                     />
-                    {this.state.uploaderIsVisible && <Uploader
-                        setImageUrl={imageUrl => this.setState({
-                            imageUrl: imageUrl,
-                            uploaderIsVisible: false
-                        })}
-                    />}
                 </header>
+                {this.state.uploaderIsVisible && <Uploader
+                    setImageUrl={imageUrl => this.setState({
+                        imageUrl: imageUrl,
+                        uploaderIsVisible: false
+                    })}
+                />}
                 <Profile
                     id={this.state.id}
                     first={this.state.first}

@@ -1,23 +1,167 @@
 body {
-    background-color: lightgrey;
+ /* min-height: 100vh; */
+ margin: 0px;
+}
+
+main {
+    /* min-height: 100vh; */
+}
+
+.welcome {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+}
+
+.welcome-logo {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-family: 'Advent Pro', sans-serif;
+}
+
+.welcome-text {
+    margin-top: 0px;
+    margin-bottom: 20px;
+    font-size: 45px;
+    color: 	#0F1A25;
+}
+
+.welcome-flag {
+    height: 150px;
+}
+
+.register {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.general-text {
+    margin-top: 0px;
+    color: 	#0F1A25;
+    font-family: 'Monda', sans-serif;
+}
+
+.general-field {
+    margin-bottom: 10px;
+    height: 23px;
+    border-radius: 20px;
+    box-shadow: none;
+    outline: 0;
+    background: transparent;
+    text-align: center;
+    width: 180px;
+    border: 1px solid #0F1A25;
+    color: 	#0F1A25;
+    font-family: 'Monda', sans-serif;
+}
+
+.general-link {
+    color: 	#ED1F34;
+    font-weight: bold;
+    font-family: 'Monda', sans-serif;
+    margin-top: 20px;
+}
+
+.general-button {
+margin-top: 15px;
+margin-bottom: 15px;
+height: 32px;
+width: 185px;
+background-color: #104B24;
+color: white;
+border-radius: 20px;
+border: 1px solid #104B24;
+/* font-weight: bold; */
+font-family: 'Monda', sans-serif;
+font-size: 17px;
+}
+
+.login {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.reset {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 header {
+    margin: 0px;
     display: flex;
-    flex-direction: row;
     align-items: center;
     justify-content: space-between;
-    border-bottom: 1px solid black;
+    /* box-shadow: 0 0 2px #0F1A25; */
+}
+
+.app-logo {
+    margin: 20px 50px 20px 50px;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: flex-end;
+}
+
+.app-flag {
+    height: 70px;
+    margin-bottom: 0px;
+}
+
+.app-welcome-text {
+    font-family: 'Advent Pro', sans-serif;
+    color: 	#0F1A25;
+    font-size: 22px;
+    margin-left: 20px;
+}
+
+.uploader {
+
 }
 
 .pp {
-    height: 80px;
-    width: 80px;
+    height: 70px;
+    width: 70px;
     border-radius: 50%;
+    margin: 20px 50px 20px 50px;
+}
+
+.profile-container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    /* margin-top: 50px; */
+    padding-top: 50px;
+    padding-bottom: 50px;
+    box-shadow: 0 0 2px #0F1A25;
+}
+
+.profile-data {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
 }
 
 .ppcontainer .pp {
     height: 300px;
     width: 300px;
     border-radius: 0;
+}
+
+.bio-editor {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.small-text {
+    margin-top: 0px;
+    color: 	#0F1A25;
+    font-family: 'Monda', sans-serif;
+    font-size: 18px;
 }
