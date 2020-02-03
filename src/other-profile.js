@@ -9,14 +9,15 @@ export default class OtherProfile extends React. Component {
 
     componentDidMount() {
         // this log is to find out the dinamic route, in this case id
-        let id = this.props.match.params.id;
-        console.log("id: ", id);
+        // let id = this.props.match.params.id;
+        console.log("this.props.match.params.id: ", this.props.match.params.id);
+
         // here we want to make a request to server to get
         // all the info about the requested user
         // browser name and server route cannot be the same
         axios.get("/api/user/" + this.props.match.params.id)
             .then (({data}) => {
-                console.log("data in get other user: ", data);
+                console.log("data in get other user: ", data.id);
                 this.setState(data);
                 console.log("state in other profile: ", this.state);
                 if (this.props.match.params.id == this.state.userId) {

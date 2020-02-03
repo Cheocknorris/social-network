@@ -23,7 +23,8 @@ exports.addCode = function(email, code) {
         `INSERT INTO codes (email, code)
          VALUES ($1, $2)
          ON CONFLICT (email)
-         DO UPDATE SET code =$2`,
+         DO UPDATE SET code =$2,
+         created_at = now()`, 
         [email, code]
     );
 };

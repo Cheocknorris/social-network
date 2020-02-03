@@ -3,8 +3,8 @@ import axios from './axios';
 import ProfilePic from './pic';
 import Uploader from './uploader';
 import Profile from './profile';
-import OtherProfile from "./other-profile"
-import { BrowserRouter, Route } from "react-router-dom"
+import OtherProfile from "./other-profile";
+import { BrowserRouter, Route } from "react-router-dom";
 
 
 export default class App extends React.Component {

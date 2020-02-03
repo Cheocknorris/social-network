@@ -298,6 +298,7 @@ app.get("/api/user/:id", function (req, res) {
             console.log("imageUrl in other users: ", results[0].imageurl);
             console.log("bio in other users: ", results[0].bio);
             res.json({
+                id: results[0].id,
                 first: results[0].first,
                 last: results[0].last,
                 imageUrl: results[0].imageurl || '/skull.png',
