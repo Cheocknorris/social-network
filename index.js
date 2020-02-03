@@ -282,6 +282,33 @@ app.post("/bio", function(req, res) {
         });
 });
 
+
+app.get("/api/user/:id", function (req, res) {
+    console.log("req.params: ", req.params);
+    let id = req.params.id;
+    console.log("id: ", id);
+    db.
+        getUsers(id)
+        .then(results => {
+            // let userId = req.session.userId;
+            console.log("userd in other profile: ", req.session.userId);
+            console.log("results is get other users: ", results);
+            console.log("first in other users: ", results[0].first);
+            console.log("last in other users: ", results[0].last);
+            console.log("imageUrl in other users: ", results[0].imageurl);
+            console.log("bio in other users: ", results[0].bio);
+            res.json({
+                first: results[0].first,
+                last: results[0].last,
+                imageUrl: results[0].imageurl || '/skull.png',
+                bio: results[0].bio,
+                userId: req.session.userId
+            });
+        }).catch(err => {
+            console.log("error in get other user: ", err);
+        });
+});
+
 //
 // this route must always be the last one
 
