@@ -326,6 +326,24 @@ app.get("/api/users", function (req, res) {
         });
 });
 
+app.get("/search/:userToSearch", function (req, res) {
+    let userToSearch = req.params.userToSearch;
+    // console.log("req.params: ", req.params);
+    console.log("userToSearch:", userToSearch);
+    db.
+        getUserToSearch(userToSearch)
+        .then(results => {
+            console.log("results in getUserToSearch: ", results);
+            res.json({
+                results
+            });
+        }).catch(err => {
+            console.log("error in get other user: ", err);
+        });
+});
+
+
+
 //
 // this route must always be the last one
 

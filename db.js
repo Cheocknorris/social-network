@@ -75,3 +75,11 @@ exports.getLatestUsers = function() {
         .query(`SELECT id, first, last, imageurl FROM users ORDER BY id DESC LIMIT 3`)
         .then(({ rows }) => rows);
 };
+
+
+exports.getUserToSearch = function getMatchingActors(userToSearch) {
+    return db.query(
+        `SELECT id, first, last, imageurl FROM users WHERE first ILIKE $1;`,
+        [userToSearch + '%']
+    ).then(({ rows }) => rows);
+};

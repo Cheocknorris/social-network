@@ -4,23 +4,39 @@ import axios from "axios";
 export default function FindPeople() {
 
     const [users, setUsers] = useState([]);
-    // const [user, setUser] = useState('');
+    const [userToSearch, setUserToSearch] = useState('');
 
     console.log("users: ", users);
-    // console.log("user", user);
+    console.log("userToSearch", userToSearch);
 
     const onUserChange = ({ target }) => {
         console.log("target.value in FindPeople: ", target.value);
+        setUserToSearch(target.value);
     };
 
     useEffect(() => {
-        axios.get('/api/users').then(({data}) => {
-            console.log('data from getLatestUsers', data);
-            setUsers(data.results);
-        }).catch(err => {
-            console.log(err);
-        });
-    }, []);
+        let ignore = false;
+        if (userToSearch === "") {
+
+            axios.get('/api/users').then(({data}) => {
+                console.log('data from getLatestUsers', data);
+                setUsers(data.results);
+            }).catch(err => {
+                console.log(err);
+            });
+        } else {
+            axios.get("/search/" + userToSearch).then(({data}) => {
+                console.log('data from search', data);
+                if (!ignore) {
+                    setUsers(data.results);
+                }
+            }).catch(err => {
+                console.log(err);
+            });
+        }
+    }, [userToSearch]);
+
+
 
 
 
