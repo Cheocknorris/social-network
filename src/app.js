@@ -3,6 +3,7 @@ import axios from './axios';
 import ProfilePic from './pic';
 import Uploader from './uploader';
 import Profile from './profile';
+import FindPeople from "./find-people";
 import OtherProfile from "./other-profile";
 import { BrowserRouter, Route } from "react-router-dom";
 
@@ -15,7 +16,7 @@ export default class App extends React.Component {
     componentDidMount() {
         axios.get("/user").then (({data}) => {
             this.setState(data);
-            console.log("data in component mount:", this.state);
+            // console.log("data in component mount:", this.state);
         });
     }
     render() {
@@ -60,6 +61,8 @@ export default class App extends React.Component {
                                     setBio={this.setBio}
                                 />
                         }/>
+
+                        <Route path="/users" component={ FindPeople }/>
 
                         <Route path="/user/:id" component={ OtherProfile }/>
 

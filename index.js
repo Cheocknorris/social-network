@@ -310,6 +310,22 @@ app.get("/api/user/:id", function (req, res) {
         });
 });
 
+app.get("/api/users", function (req, res) {
+
+    db.
+        getLatestUsers()
+        .then(results => {
+
+            console.log("results in getLatestUsers ", results);
+            res.json({
+                results
+            });
+
+        }).catch(err => {
+            console.log("error in get other user: ", err);
+        });
+});
+
 //
 // this route must always be the last one
 

@@ -24,7 +24,7 @@ exports.addCode = function(email, code) {
          VALUES ($1, $2)
          ON CONFLICT (email)
          DO UPDATE SET code =$2,
-         created_at = now()`, 
+         created_at = now()`,
         [email, code]
     );
 };
@@ -68,4 +68,10 @@ exports.updateBio = function(id, bio) {
         returning bio`,
         [id, bio]
     ).then(({ rows }) => rows);
+};
+
+exports.getLatestUsers = function() {
+    return db
+        .query(`SELECT id, first, last, imageurl FROM users ORDER BY id DESC LIMIT 3`)
+        .then(({ rows }) => rows);
 };
