@@ -77,9 +77,18 @@ exports.getLatestUsers = function() {
 };
 
 
-exports.getUserToSearch = function getMatchingActors(userToSearch) {
+exports.getUserToSearch = function (userToSearch) {
     return db.query(
         `SELECT id, first, last, imageurl FROM users WHERE first ILIKE $1;`,
         [userToSearch + '%']
+    ).then(({ rows }) => rows);
+};
+
+exports.getFriendsStatus = function(recipientId, senderId) {
+    return db.query(
+        `SELECT * FROM friendships
+        WHERE (recipient_id = $1 AND sender_id = $2)
+        OR (recipient_id = $2 AND sender_id = $1);`,
+        [recipientId, senderId]
     ).then(({ rows }) => rows);
 };
