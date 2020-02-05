@@ -77,7 +77,7 @@ exports.getLatestUsers = function() {
 };
 
 
-exports.getUserToSearch = function (userToSearch) {
+exports.getUserToSearch = function(userToSearch) {
     return db.query(
         `SELECT id, first, last, imageurl FROM users WHERE first ILIKE $1;`,
         [userToSearch + '%']
@@ -91,4 +91,13 @@ exports.getFriendsStatus = function(recipientId, senderId) {
         OR (recipient_id = $2 AND sender_id = $1);`,
         [recipientId, senderId]
     ).then(({ rows }) => rows);
+};
+
+exports.sendRequest = function(senderId, recipientId) {
+    return db.query(
+        `INSERT into friendships (sender_id, recipient_id)
+        VALUES ($1, $2)
+        returning accepted`,
+        [senderId, recipientId]
+    );
 };

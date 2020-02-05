@@ -346,19 +346,56 @@ app.get("/friends-status/:id", function (req, res) {
     // console.log("req.params: ", req.params);
     // console.log("req.params.id: ", req.params.id);
     // console.log("req.session.userId: ", req.session.userId);
+    let loggedUser = req.session.userId;
+    let viwedUser =  req.params.id;
+    console.log("loggedUser", loggedUser);
+    console.log("viwedUser", viwedUser);
+    db.
+        getFriendsStatus(viwedUser, loggedUser)
+        .then(results => {
+            console.log("results in getFriendsStatus: ", results);
+            if (results.length === 0) {
+                console.log("not friend req");
+                res.json({
+                    success: true,
+                    button: "Send friend request"
+                });
+            } else if (results[0].accepted == false) {
+                console.log("there's a friend request");
+                // console.log("results.sender_id: ", results[0].sender_id);
+                if (loggedUser == results[0].sender_id) {
+                    res.json({
+                        success: true,
+                        button: "cancel request"
+                    });
+                } else if (loggedUser == results[0].recipient_id) {
+                    res.json({
+                        success: true,
+                        button: "accept request"
+                    });
+                }
+
+            }
+        }).catch(err => {
+            console.log("error in get friend status: ", err);
+        });
+});
+
+app.post("/make-friend-request/:id", function (req, res) {
+    console.log("req.params: ", req.params);
     let senderId = req.session.userId;
     let recipientId =  req.params.id;
     console.log("senderId", senderId);
     console.log("recipientId", recipientId);
     db.
-        getFriendsStatus(recipientId, senderId)
+        sendRequest(senderId, recipientId)
         .then(results => {
-            console.log("results in getFriendsStatus: ", results);
+            console.log("results in post make friend request: ", results);
             res.json({
-                results
+                success: true, button: "Cancel request"
             });
         }).catch(err => {
-            console.log("error in get other user: ", err);
+            console.log("error in post make friend request: ", err);
         });
 });
 
