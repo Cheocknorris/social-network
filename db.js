@@ -112,7 +112,9 @@ exports.acceptRequest = function(senderId, recipientId) {
 };
 
 exports.endFrienship = function(senderId, recipientId) {
-    return db.query(`DELETE FROM friendships WHERE sender_id = $1 AND recipient_id = $2`,
-        [senderId, recipientId]
+    return db.query(`DELETE FROM friendships
+        WHERE (sender_id = $1 AND recipient_id = $2)
+            OR (recipient_id = $1 AND sender_id = $2);`,
+    [senderId, recipientId]
     );
 };

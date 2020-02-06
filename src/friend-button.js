@@ -34,8 +34,14 @@ export default function FriendButton(props) {
             }).catch(err => {
                 console.log("err", err);
             });
-
-            // setbuttonText(results.data);
+        } else if (buttonText.button == "End friendship") {
+            console.log("ending friendship");
+            axios.post("/end-friendship/" + id).then(results => {
+                console.log("results in end friendship", results);
+                setbuttonText(results.data);
+            }).catch(err => {
+                console.log("err", err);
+            });
         }
     };
 

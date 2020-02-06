@@ -377,7 +377,7 @@ app.get("/friends-status/:id", function (req, res) {
             } else {
                 res.json({
                     success: true,
-                    button: "End frienship"
+                    button: "End friendship"
                 });
             }
 
