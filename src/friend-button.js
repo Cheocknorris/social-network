@@ -20,7 +20,22 @@ export default function FriendButton(props) {
             });
         } else if (buttonText.button == "Accept request") {
             console.log("accepting request");
-            axios.post("/accept-friend-request/" + id);
+            axios.post("/accept-friend-request/" + id).then(results => {
+                console.log("results in cancel request", results);
+                setbuttonText(results.data);
+            }).catch(err => {
+                console.log("err", err);
+            });
+        } else if (buttonText.button == "Cancel request") {
+            console.log("canceling request");
+            axios.post("/end-friendship/" + id).then(results => {
+                console.log("results in cancel request", results);
+                setbuttonText(results.data);
+            }).catch(err => {
+                console.log("err", err);
+            });
+
+            // setbuttonText(results.data);
         }
     };
 

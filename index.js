@@ -366,7 +366,7 @@ app.get("/friends-status/:id", function (req, res) {
                 if (loggedUser == results[0].sender_id) {
                     res.json({
                         success: true,
-                        button: "cancel request"
+                        button: "Cancel request"
                     });
                 } else if (loggedUser == results[0].recipient_id) {
                     res.json({
@@ -394,7 +394,7 @@ app.post("/make-friend-request/:id", function (req, res) {
     console.log("loggedUser", loggedUser);
     console.log("viewedUser", viewedUser);
     db.
-        sendRequest(viewedUser, viewedUser)
+        sendRequest(loggedUser, viewedUser)
         .then(results => {
             console.log("results in post make friend request: ", results);
             res.json({
@@ -420,6 +420,22 @@ app.post("/accept-friend-request/:id", function (req, res) {
             });
         }).catch(err => {
             console.log("err", err);
+        });
+});
+
+app.post("/end-friendship/:id", function (req, res) {
+    console.log("req.params: ", req.params);
+    let loggedUser = req.session.userId;
+    let viewedUser =  req.params.id;
+    console.log("loggedUser", loggedUser);
+    console.log("viewedUser", viewedUser);
+    db.
+        endFrienship(loggedUser, viewedUser)
+        .then(results => {
+            console.log("results in end friendship", results);
+            res.json({
+                success: true, button: "Send friend request"
+            });
         });
 });
 
