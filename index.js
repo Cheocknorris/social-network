@@ -347,11 +347,11 @@ app.get("/friends-status/:id", function (req, res) {
     // console.log("req.params.id: ", req.params.id);
     // console.log("req.session.userId: ", req.session.userId);
     let loggedUser = req.session.userId;
-    let viwedUser =  req.params.id;
+    let viewedUser =  req.params.id;
     console.log("loggedUser", loggedUser);
-    console.log("viwedUser", viwedUser);
+    console.log("viewedUser", viewedUser);
     db.
-        getFriendsStatus(viwedUser, loggedUser)
+        getFriendsStatus(viewedUser, loggedUser)
         .then(results => {
             console.log("results in getFriendsStatus: ", results);
             if (results.length === 0) {
@@ -371,11 +371,17 @@ app.get("/friends-status/:id", function (req, res) {
                 } else if (loggedUser == results[0].recipient_id) {
                     res.json({
                         success: true,
-                        button: "accept request"
+                        button: "Accept request"
                     });
                 }
-
+            } else {
+                res.json({
+                    success: true,
+                    button: "End frienship"
+                });
             }
+
+
         }).catch(err => {
             console.log("error in get friend status: ", err);
         });
@@ -383,12 +389,12 @@ app.get("/friends-status/:id", function (req, res) {
 
 app.post("/make-friend-request/:id", function (req, res) {
     console.log("req.params: ", req.params);
-    let senderId = req.session.userId;
-    let recipientId =  req.params.id;
-    console.log("senderId", senderId);
-    console.log("recipientId", recipientId);
+    let loggedUser = req.session.userId;
+    let viewedUser =  req.params.id;
+    console.log("loggedUser", loggedUser);
+    console.log("viewedUser", viewedUser);
     db.
-        sendRequest(senderId, recipientId)
+        sendRequest(viewedUser, viewedUser)
         .then(results => {
             console.log("results in post make friend request: ", results);
             res.json({
@@ -399,7 +405,24 @@ app.post("/make-friend-request/:id", function (req, res) {
         });
 });
 
-//
+app.post("/accept-friend-request/:id", function (req, res) {
+    console.log("req.params: ", req.params);
+    let loggedUser = req.session.userId;
+    let viewedUser =  req.params.id;
+    console.log("loggedUser", loggedUser);
+    console.log("viewedUser", viewedUser);
+    db.
+        acceptRequest(viewedUser, loggedUser)
+        .then(results => {
+            console.log("results in accept req", results);
+            res.json({
+                success: true, button: "End friendship"
+            });
+        }).catch(err => {
+            console.log("err", err);
+        });
+});
+
 // this route must always be the last one
 
 app.get("*", function(req, res) {

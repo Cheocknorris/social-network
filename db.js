@@ -101,3 +101,12 @@ exports.sendRequest = function(senderId, recipientId) {
         [senderId, recipientId]
     );
 };
+
+exports.acceptRequest = function(senderId, recipientId) {
+    return db.query(
+        `UPDATE friendships
+        SET accepted = true
+        WHERE sender_id = $1 AND recipient_id = $2`,
+        [senderId, recipientId]
+    );
+};

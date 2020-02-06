@@ -9,6 +9,21 @@ export default function FriendButton(props) {
     console.log("id", id);
     const [buttonText, setbuttonText] = useState('');
 
+    const handleClick = () => {
+
+        if (buttonText.button == "Send friend request") {
+            axios.post("/make-friend-request/" + id).then(results => {
+                console.log("results", results);
+                setbuttonText(results.data);
+            }).catch(err => {
+                console.log("err", err);
+            });
+        } else if (buttonText.button == "Accept request") {
+            console.log("accepting request");
+            axios.post("/accept-friend-request/" + id);
+        }
+    };
+
     useEffect(() => {
         (async() => {
             try {
@@ -23,17 +38,6 @@ export default function FriendButton(props) {
     }, []);
 
 
-    const handleClick = () => {
-
-        axios.post("/make-friend-request/" + id).then(results => {
-            console.log("results", results);
-            setbuttonText(results.data);
-
-        }).catch(err => {
-            console.log("err", err);
-        });
-
-    };
 
 
 
