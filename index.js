@@ -439,6 +439,21 @@ app.post("/end-friendship/:id", function (req, res) {
         });
 });
 
+app.get("/friends-wannabes", function(req, res) {
+    console.log("req /friends-wannabes happening");
+    let loggedUser = req.session.userId;
+    console.log("loggedUser", loggedUser);
+    db.
+        getFriendsWannabes(loggedUser)
+        .then(results => {
+            console.log("get friends-wannabes", results);
+            res.json({
+                results
+            });
+
+        });
+});
+
 // this route must always be the last one
 
 app.get("*", function(req, res) {
