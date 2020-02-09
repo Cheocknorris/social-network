@@ -36,3 +36,22 @@ export async function acceptFriendRequest(id) {
     }
 
 }
+
+
+export async function unfriend(id) {
+    console.log("id", id);
+    try {
+        console.log("action unfriend taking place");
+        const {data} = await axios.post("/end-friendship/" + id);
+        console.log("data in acceptFriendRequest", data);
+
+        return {
+            type: 'UNFRIEND',
+            id: id
+        };
+
+    } catch (err) {
+        console.log(err);
+    }
+
+}

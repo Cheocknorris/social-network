@@ -454,6 +454,12 @@ app.get("/friends-wannabes", function(req, res) {
         });
 });
 
+app.get("/logout", (req, res) => {
+    req.session = null;
+    res.redirect("/welcome");
+});
+
+
 // this route must always be the last one
 
 app.get("*", function(req, res) {
