@@ -2,7 +2,7 @@ import axios from './axios';
 
 
 export async function receiveFriendsWannabes() {
-    // AXIOS
+
 
     try {
         console.log("action receiveFriendsWannabes taking place");
@@ -14,9 +14,25 @@ export async function receiveFriendsWannabes() {
             friendsWannabes: data.results.rows
         };
 
-    } catch (e) {
-        console.log(e);
+    } catch (err) {
+        console.log(err);
     }
+}
 
+export async function acceptFriendRequest(id) {
+    console.log("id", id);
+    try {
+        console.log("action acceptFriendRequest taking place");
+        const {data} = await axios.post("/accept-friend-request/" + id);
+        console.log("data in acceptFriendRequest", data);
+        //
+        return {
+            type: 'ACCEPT_FRIEND_REQUEST',
+            id: id
+        };
+
+    } catch (err) {
+        console.log(err);
+    }
 
 }
