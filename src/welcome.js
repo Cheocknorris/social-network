@@ -9,11 +9,15 @@ import Reset from "./reset";
 export default function Welcome() {
     return (
         <div className="welcome">
-            <div className="welcome-logo">
-                <img className="welcome-flag" src="mexico.png" alt=""></img>
-                <h1 className="welcome-text"> Mexicanos en Berlín </h1>
+            <div className="welcome-up">
+                <div className="logo-container">
+                    <img className="welcome-flag" src="skull.png" alt=""></img>
+                </div>
+                <div className="welcome-logo">
+                    <h1 className="welcome-text"> MEXICANS IN BERLIN </h1>
+                </div>
             </div>
-            <div>
+            <div className="welcome-down">
                 <HashRouter>
                     <Route exact path="/" component={Registration} />
                     <Route exact path="/login" component={Login} />

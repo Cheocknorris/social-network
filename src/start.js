@@ -3,6 +3,7 @@ import ReactDOM from "react-dom";
 import Welcome from "./welcome";
 import Login from "./login";
 import App from "./app";
+import { init } from "./socket";
 
 import { Provider } from "react-redux";
 
@@ -28,11 +29,12 @@ if (location.pathname == "/welcome") {
     elem = <Login />;
 }
 else {
+    init(store);
     elem = (
         <Provider store={store}>
             <App />
         </Provider>
-    );    
+    );
 }
 
 ReactDOM.render(elem, document.querySelector("main"));

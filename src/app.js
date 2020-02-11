@@ -7,6 +7,8 @@ import FindPeople from "./find-people";
 import OtherProfile from "./other-profile";
 import Friends from "./friends";
 import { BrowserRouter, Route } from "react-router-dom";
+import { Link } from 'react-router-dom';
+import Chat  from './chat';
 
 
 export default class App extends React.Component {
@@ -30,9 +32,17 @@ export default class App extends React.Component {
                     <div>
                         <header>
                             <div className="app-logo">
-                                <img className="app-flag" src="/mexico.png" alt=""></img>
-                                <p className="app-welcome-text"> Mexicanos en Berlín </p>
+                                <div className="app-pic">
+                                    <img className="app-flag" src="/skull.png" alt=""></img>
+                                </div>
+                                <p className="app-welcome-text"> MEXICANS IN BERLIN </p>
                             </div>
+                            <div className="menu">
+                                <Link className="menu-link" to="/friends">Your friends </Link>
+                                <Link className="menu-link" to="/users">Find friends </Link>
+                                <Link className="menu-link" to="/logout">Log out </Link>
+                            </div>
+
                             <ProfilePic
                                 clickHandler={
                                     () => this.setState({uploaderIsVisible: true})
@@ -41,6 +51,7 @@ export default class App extends React.Component {
                                 first={this.state.first}
                                 last={this.state.last}
                             />
+
                         </header>
                         {this.state.uploaderIsVisible && <Uploader
                             setImageUrl={imageUrl => this.setState({
@@ -68,6 +79,8 @@ export default class App extends React.Component {
                         <Route path="/user/:id" component={ OtherProfile }/>
 
                         <Route path="/friends" component={ Friends }/>
+
+                        <Route path="/chat" component={ Chat }/>
 
                     </div>
                 </BrowserRouter>

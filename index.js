@@ -1,7 +1,9 @@
 const express = require("express");
 const app = express();
+const server = require('http').Server(app);
+const io = require('socket.io')(server, { origins: 'localhost:8080' });
+// if we deploy const io = require('socket.io')(server, { origins: 'localhost:8080' add heroku here});
 const compression = require("compression");
-const cookieSession = require("cookie-session");
 const db = require("./db");
 const bcrypt = require("./bcrypt");
 const csurf = require("csurf");
@@ -45,12 +47,19 @@ const uploader = multer({
 
 /////////////////////////////////
 
-app.use(
-    cookieSession({
-        secret: "I'm always angry",
-        maxAge: 1000 * 60 * 60 * 24 * 14
-    })
-);
+
+
+const cookieSession = require('cookie-session');
+const cookieSessionMiddleware = cookieSession({
+    secret: `I'm always angry.`,
+    maxAge: 1000 * 60 * 60 * 24 * 90
+});
+
+app.use(cookieSessionMiddleware);
+io.use(function(socket, next) {
+    cookieSessionMiddleware(socket.request, socket.request.res, next);
+});
+
 
 app.use(csurf());
 
@@ -470,6 +479,30 @@ app.get("*", function(req, res) {
     }
 });
 
-app.listen(8080, function() {
+server.listen(8080, function() {
     console.log("I'm listening.");
+});
+
+io.on('connection', function(socket) {
+    if (!socket.request.session.userId) {
+        return socket.disconnect(true);
+    }
+
+    let userId = socket.request.session.userId;
+
+    socket.on("Chat message", msg => {
+        console.log("on the server", msg);
+
+        io.sockets.emit("muffin", msg);
+    });
+
+    // go and get the last 10 chat messages from DB
+    // (new table and query)
+
+    // db.
+    // getLastTenMessages()
+    //     .then(results => {
+    //         io.sockets.emit('chatMessages', data.rows);
+    //     }).catch(err => console.log("err", err))
+
 });
