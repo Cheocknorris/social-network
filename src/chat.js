@@ -14,10 +14,10 @@ export default function Chat() {
 
     useEffect(() => {
         console.log("chat mounted");
-        console.log("elemRef: ", elemRef);
-        console.log("scroll top", elemRef.current.scrollTop);
-        console.log("client height", elemRef.current.clientHeight);
-        console.log("scroll height", elemRef.current.scrollHeight);
+        // console.log("elemRef: ", elemRef);
+        // console.log("scroll top", elemRef.current.scrollTop);
+        // console.log("client height", elemRef.current.clientHeight);
+        // console.log("scroll height", elemRef.current.scrollHeight);
         elemRef.current.scrollTop = elemRef.current.scrollHeight - elemRef.current.clientHeight;
     }, []);
 
@@ -35,20 +35,17 @@ export default function Chat() {
         <div className="chat">
             <h1> Chat room </h1>
             <div className="chat-container" ref={elemRef}>
-                <p> chat messages will go here</p>
-                <p> chat messages will go here</p>
-                <p> chat messages will go here</p>
-                <p> chat messages will go here</p>
-                <p> chat messages will go here</p>
-                <p> chat messages will go here</p>
-                <p> chat messages will go here</p>
-                <p> chat messages will go here</p>
-                <p> chat messages will go here</p>
-                <p> chat messages will go here</p>
-                <p> chat messages will go here</p>
-                <p> chat messages will go here</p>
-                <p> chat messages will go here</p>
-                <p> chat messages will go here</p>
+                <ul>
+                    { chatMessages && chatMessages.map(chatMessage => {
+                        return <li key={chatMessage.message_id}> <img
+                            className = "pp"
+                            src = {chatMessage.imageurl}
+                            alt = {chatMessage.first + chatMessage.last}
+                        /> {chatMessage.first} {chatMessage.last} {chatMessage.message}</li>;
+
+                    }) }
+
+                </ul>
             </div>
             <textarea
                 name="chat"

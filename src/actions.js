@@ -34,7 +34,6 @@ export async function acceptFriendRequest(id) {
     } catch (err) {
         console.log(err);
     }
-
 }
 
 
@@ -53,5 +52,13 @@ export async function unfriend(id) {
     } catch (err) {
         console.log(err);
     }
+}
 
+
+export async function chatMessages(msgs) {
+    console.log("msgs", msgs);
+    return {
+        type: 'CHATMESSAGES',
+        chatMessages: msgs
+    };
 }

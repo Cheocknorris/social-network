@@ -33,12 +33,18 @@ export default function reducer(state ={}, action) {
             ...state,
             friendsWannabes: state.friendsWannabes.filter(
                 friendWannabe => friendWannabe.id !== action.id
-            ) 
+            )
 
         };
     }
 
+    if (action.type === 'CHATMESSAGES') {
 
+        state = {
+            ...state,
+            chatMessages: action.chatMessages
+        };
+    }
 
     return state;
 }

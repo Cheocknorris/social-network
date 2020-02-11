@@ -491,18 +491,39 @@ io.on('connection', function(socket) {
     let userId = socket.request.session.userId;
 
     socket.on("Chat message", msg => {
-        console.log("on the server", msg);
+        console.log("message on server: ", msg);
+        console.log("userId: ", userId);
 
-        io.sockets.emit("muffin", msg);
+        db.
+            addMessages(userId, msg)
+            .then(addResults => {
+                console.log("getResults: ", addResults);
+            }).catch(err => {
+                console.log("err: ", err);
+            });
+
+
+
+        db.
+            getMessageInfo(userId)
+            .then(getResults => {
+                console.log("getResults: ", getResults);
+
+            }).catch(err => {
+                console.log("err: ", err);
+            });
+
+
+
+        // io.sockets.emit("message to frontend", msg);
     });
 
-    // go and get the last 10 chat messages from DB
-    // (new table and query)
-
-    // db.
-    // getLastTenMessages()
-    //     .then(results => {
-    //         io.sockets.emit('chatMessages', data.rows);
-    //     }).catch(err => console.log("err", err))
-
+    db.
+        getLastTenMessages()
+        .then(results => {
+            // console.log("results: ", results.rows);
+            io.sockets.emit('chatMessages', results.rows.reverse());
+        }).catch(err => {
+            console.log("err", err);
+        });
 });

@@ -130,3 +130,26 @@ exports.getFriendsWannabes = function(recipientId) {
     [recipientId]
     );
 };
+
+exports.getLastTenMessages = function() {
+    return db.query(`SELECT message_id, user_id, message, created_at, first, last, imageurl
+      FROM chat
+      JOIN users
+      ON chat.user_id = users.id
+      ORDER BY created_at DESC LIMIT 10;`,
+    );
+};
+
+exports.addMessages = function(userId, msg) {
+    return db.query(
+        `INSERT into chat (user_id, message)
+        VALUES ($1, $2)
+        returning created_at`,
+        [userId, msg]
+    );
+};
+
+exports.getMessageInfo = function(userId) {
+    return db.query(
+        `SELECT * FROM users WHERE id=$1`, [userId]);
+};
