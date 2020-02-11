@@ -46,5 +46,12 @@ export default function reducer(state ={}, action) {
         };
     }
 
+    if (action.type === "CHATMESSAGE") {
+        state = {
+            ...state,
+            chatMessages: state.chatMessages.concat(action.chatMessage)
+        };
+    }
+
     return state;
 }

@@ -494,29 +494,42 @@ io.on('connection', function(socket) {
         console.log("message on server: ", msg);
         console.log("userId: ", userId);
 
-        db.
-            addMessages(userId, msg)
+        db.addMessages(userId, msg)
             .then(addResults => {
-                console.log("getResults: ", addResults);
-            }).catch(err => {
+                console.log("addResults: ", addResults);
+                db.getMessageInfo(userId)
+                    .then(getResults => {
+                        console.log("getResults", getResults.rows);
+                        console.log("first", getResults.rows[0].first);
+                        console.log("last", getResults.rows[0].last);
+                        console.log("imageUrl", getResults.rows[0].imageurl);
+                        console.log("msg", msg);
+                        console.log("userId: ", userId);
+                        console.log("message_id", addResults.rows[0].message_id);
+                        console.log("created_at", addResults.rows[0].created_at);
+                        io.sockets.emit(
+                            "chatMessage",
+                            {
+                                message_id: addResults.rows[0].message_id,
+                                user_id: userId,
+                                message: msg,
+                                created_at: addResults.rows[0].created_at,
+                                first: getResults.rows[0].first,
+                                last: getResults.rows[0].last,
+                                imageurl: getResults.rows[0].imageurl
+                            }
+                        );
+                    });
+            })
+            .catch(err => {
                 console.log("err: ", err);
             });
-
-
-
-        db.
-            getMessageInfo(userId)
-            .then(getResults => {
-                console.log("getResults: ", getResults);
-
-            }).catch(err => {
-                console.log("err: ", err);
-            });
-
-
-
-        // io.sockets.emit("message to frontend", msg);
     });
+
+
+
+
+
 
     db.
         getLastTenMessages()

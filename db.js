@@ -144,7 +144,7 @@ exports.addMessages = function(userId, msg) {
     return db.query(
         `INSERT into chat (user_id, message)
         VALUES ($1, $2)
-        returning created_at`,
+        returning created_at, message_id`,
         [userId, msg]
     );
 };

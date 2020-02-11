@@ -19,7 +19,7 @@ export default function Chat() {
         // console.log("client height", elemRef.current.clientHeight);
         // console.log("scroll height", elemRef.current.scrollHeight);
         elemRef.current.scrollTop = elemRef.current.scrollHeight - elemRef.current.clientHeight;
-    }, []);
+    }, [chatMessages]);
 
     const keyCheck = e => {
         if (e.key === "Enter") {

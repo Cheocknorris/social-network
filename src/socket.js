@@ -17,12 +17,12 @@ export const init = store => {
                 chatMessages(msgs)
             )
         );
-        //
-        // socket.on(
-        //     'chatMessage',
-        //     msg => store.dispatch(
-        //         chatMessage(msg)
-        //     )
-        // );
+        
+        socket.on(
+            'chatMessage',
+            msg => store.dispatch(
+                chatMessage(msg)
+            )
+        );
     }
 };

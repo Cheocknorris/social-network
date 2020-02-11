@@ -55,10 +55,18 @@ export async function unfriend(id) {
 }
 
 
-export async function chatMessages(msgs) {
+export function chatMessages(msgs) {
     console.log("msgs", msgs);
     return {
         type: 'CHATMESSAGES',
         chatMessages: msgs
+    };
+}
+
+export function chatMessage (msg) {
+    console.log("msg: ", msg);
+    return {
+        type: "CHATMESSAGE",
+        chatMessage: msg 
     };
 }
