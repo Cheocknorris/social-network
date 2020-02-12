@@ -37,7 +37,7 @@ export default function Friends() {
     return (
         <div>
             <div className="wannabes">
-                <h1>These people want to be your friends:</h1>
+                <h1 className="friend-text">These people want to be your friends:</h1>
                 <div className="friend-container">
                     { wannaBes && wannaBes.map(wannaBe => {
                         return <div className="friend" key={wannaBe.id}>
@@ -58,7 +58,7 @@ export default function Friends() {
                 </div>
             </div>
             <div className="friends">
-                <h1>These people are currently your friends: </h1>
+                <h1 className="friend-text">These people are currently your friends: </h1>
                 <div className="friend-container">
                     { friends && friends.map(friend => {
                         return <div className="friend" key={friend.id}>
@@ -74,8 +74,7 @@ export default function Friends() {
                                 <button className="friend-button" onClick={ e => dispatch(unfriend(friend.id)) }>End friendship</button>
                             </div>
                         </div>;
-                    })
-                 }
+                    }) }
                 </div>
             </div>
 

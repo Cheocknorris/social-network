@@ -261,6 +261,17 @@ img {
     margin-left: 80px;
 }
 
+.search {
+    margin: 30px 0 0 50px;
+}
+
+.search-text {
+    color: 	#0F1A25;
+    font-family: 'Monda', sans-serif;
+    margin: 30px 0 30px 0;
+    font-size: 20px;
+}
+
 .friend-container {
     display: flex;
     flex-direction: row;
@@ -269,15 +280,22 @@ img {
     margin-left: 50px;
 }
 
+.friend-text {
+    color: 	#0F1A25;
+    font-family: 'Monda', sans-serif;
+    margin: 50px 0 0px 50px;
+    font-size: 20px;
+}
+
 .friend {
     display: flex;
     flex-direction: row;
-    min-width: 100px;
+    min-width: 250px;
     padding: 10px;
     border-radius: 5px;
     background-color: rgb(209, 231, 248, 0.8);
     box-shadow: 0 0 2px #0F1A25;
-    margin: 30px;
+    margin: 30px 20px 0 0;
 }
 
 .friend-left {

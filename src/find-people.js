@@ -42,17 +42,30 @@ export default function FindPeople() {
 
     return (
         <div>
-            <h1>Here we show latest three users</h1>
-            <ul>
-                { users.map(user => {
-                    return <li key={user.id}> <img
-                        className = "pp"
-                        src = {user.imageurl}
-                        alt = {user.first + user.last}
-                    /> {user.first} {user.last}</li>;
-                }) }
-            </ul>
-            <input onChange={onUserChange} type='text' placeholder='countries to search for' />
+            <div className="friends">
+                <div className="search">
+                    <h1 className="search-text">Looking for someone in particular?</h1>
+                    <input className="short-field" onChange={onUserChange} type='text' placeholder='Find new friends' />
+                </div>
+                <div className="friend-container">
+                    <h1 className="friend-text">These people joined lately</h1>
+                    
+                    { users.map(user => {
+                        return <div className="friend" key={user.id}>
+                            <div className="friend-left">
+                                <img
+                                    className = "friends-pic"
+                                    src = {user.imageurl}
+                                    alt = {user.first + user.last}
+                                />
+                            </div>
+                            <div className="friend-right">
+                                <p className="friend-name">{user.first} {user.last}</p>
+                            </div>
+                        </div>;
+                    }) }
+                </div>
+            </div>
         </div>
     );
 }
