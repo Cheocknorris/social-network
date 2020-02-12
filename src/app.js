@@ -38,9 +38,10 @@ export default class App extends React.Component {
                                 <p className="app-welcome-text"> MEXICANS IN BERLIN </p>
                             </div>
                             <div className="menu">
+                                <Link className="menu-link" to="/">Your profile </Link>
                                 <Link className="menu-link" to="/friends">Your friends </Link>
                                 <Link className="menu-link" to="/users">Find friends </Link>
-                                <Link className="menu-link" to="/logout">Log out </Link>
+                                <a className="menu-link-right" href="/logout">Log out</a>
                             </div>
 
                             <ProfilePic

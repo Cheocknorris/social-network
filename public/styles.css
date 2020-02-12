@@ -75,6 +75,12 @@ body {
     font-family: 'Monda', sans-serif;
 }
 
+.name {
+    margin-top: 0px;
+    color: 	#ED1F34;
+    font-family: 'Monda', sans-serif;
+}
+
 .short-field {
     margin-bottom: 10px;
     margin-left: 5px;
@@ -126,6 +132,21 @@ border: 1px solid #00CCB3;
 font-family: 'Monda', sans-serif;
 font-size: 17px;
 }
+
+.pink-button {
+margin-top: 15px;
+margin-bottom: 5px;
+height: 40px;
+width: 185px;
+background-color: rgb(253, 124, 143);
+color: white;
+border-radius: 5px;
+border: 1px solid rgb(253, 124, 143);
+/* font-weight: bold; */
+font-family: 'Monda', sans-serif;
+font-size: 17px;
+}
+
 
 .login {
     display: flex;
@@ -197,6 +218,17 @@ header {
     margin-left: 15px;
 }
 
+.menu-link-right {
+    font-family: 'Monda', sans-serif;
+    font-size: 17px;
+    color: white;
+    margin-left: 20px;
+    margin-top: 15px;
+    text-decoration: none;
+    padding-right: 15px;
+    margin-left: 15px;
+}
+
 .menu-pic {
     display: flex;
     flex-direction: row;
@@ -216,6 +248,10 @@ header {
     justify-content: center;
 }
 
+img {
+    object-fit: cover;
+}
+
 .pp {
     /* margin-top: 20%; */
     height: 65px;
@@ -225,8 +261,65 @@ header {
     margin-left: 80px;
 }
 
-.profile-pic {
+.friend-container {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    margin-left: 50px;
+}
 
+.friend {
+    display: flex;
+    flex-direction: row;
+    min-width: 100px;
+    padding: 10px;
+    border-radius: 5px;
+    background-color: rgb(209, 231, 248, 0.8);
+    box-shadow: 0 0 2px #0F1A25;
+    margin: 30px;
+}
+
+.friend-left {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin: 0px;
+}
+
+.friend-right {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+}
+
+.friends-pic {
+    height: 75px;
+    width: 75px;
+    border-radius: 5%;
+    margin: 0px 5px 0px 5px;
+}
+
+.friend-name {
+    font-family: 'Monda', sans-serif;
+    font-size: 17px;
+    font-weight: bold;
+    color: 	#0F1A25;
+    margin-bottom: 0px;
+    margin-left: 10px;
+    margin-right: 5px;
+}
+
+.friend-button {
+    background-color: transparent;
+    border: none;
+    color: #ED1F34;
+    text-decoration: underline;
+    margin-left: 5px;
+    font-family: 'Monda', sans-serif;
+    font-size: 15px;
+    margin-top: 0px;
 }
 
 .profile-container {
@@ -234,7 +327,7 @@ header {
     flex-direction: row;
     align-items: center;
     /* margin-top: 50px; */
-    padding-top: 50px;
+    padding-top: 100px;
     padding-bottom: 50px;
 
 }
@@ -243,6 +336,11 @@ header {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
+    width: 500px;
+    padding: 50px;
+    border-radius: 5px;
+    background-color: rgb(209, 231, 248, 0.8);
+    box-shadow: 0 0 2px #0F1A25;
 }
 
 .ppcontainer .pp {
@@ -262,7 +360,7 @@ header {
     margin-top: 0px;
     color: 	#0F1A25;
     font-family: 'Monda', sans-serif;
-    font-size: 18px;
+    font-size: 15px;
 }
 
 

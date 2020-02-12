@@ -38,29 +38,45 @@ export default function Friends() {
         <div>
             <div className="wannabes">
                 <h1>These people want to be your friends:</h1>
-                <ul>
+                <div className="friend-container">
                     { wannaBes && wannaBes.map(wannaBe => {
-                        return <li key={wannaBe.id}> <img
-                            className = "pp"
-                            src = {wannaBe.imageurl}
-                            alt = {wannaBe.first + wannaBe.last}
-                        /> {wannaBe.first} {wannaBe.last} <button onClick={ e => dispatch(acceptFriendRequest(wannaBe.id)) }>Accept request</button></li>;
+                        return <div className="friend" key={wannaBe.id}>
+                            <div className="friend-left">
+                                <img
+                                    className = "friends-pic"
+                                    src = {wannaBe.imageurl}
+                                    alt = {wannaBe.first + wannaBe.last}
+                                />
+                            </div>
+                            <div className="friend-right">
+                                <p className="friend-name">{wannaBe.first} {wannaBe.last}</p>
+                                <button className="friend-button" onClick={ e => dispatch(acceptFriendRequest(wannaBe.id)) }>Accept request</button>
+                            </div>
+                        </div>;
 
                     }) }
-
-                </ul>
+                </div>
             </div>
             <div className="friends">
                 <h1>These people are currently your friends: </h1>
-                <ul>
+                <div className="friend-container">
                     { friends && friends.map(friend => {
-                        return <li key={friend.id}> <img
-                            className = "pp"
-                            src = {friend.imageurl}
-                            alt = {friend.first + friend.last}
-                        /> {friend.first} {friend.last} <button onClick={ e => dispatch(unfriend(friend.id)) }>End friendship</button></li>;
-                    }) }
-                </ul>
+                        return <div className="friend" key={friend.id}>
+                            <div className="friend-left">
+                                <img
+                                    className = "friends-pic"
+                                    src = {friend.imageurl}
+                                    alt = {friend.first + friend.last}
+                                />
+                            </div>
+                            <div className="friend-right">
+                                <p className="friend-name">{friend.first} {friend.last}</p>
+                                <button className="friend-button" onClick={ e => dispatch(unfriend(friend.id)) }>End friendship</button>
+                            </div>
+                        </div>;
+                    })
+                 }
+                </div>
             </div>
 
         </div>
