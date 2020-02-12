@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from "axios";
+import { Link } from 'react-router-dom';
 
 export default function FindPeople() {
 
@@ -47,23 +48,25 @@ export default function FindPeople() {
                     <h1 className="search-text">Looking for someone in particular?</h1>
                     <input className="short-field" onChange={onUserChange} type='text' placeholder='Find new friends' />
                 </div>
-                <div className="friend-container">
-                    <h1 className="friend-text">These people joined lately</h1>
-                    
-                    { users.map(user => {
-                        return <div className="friend" key={user.id}>
-                            <div className="friend-left">
-                                <img
-                                    className = "friends-pic"
-                                    src = {user.imageurl}
-                                    alt = {user.first + user.last}
-                                />
-                            </div>
-                            <div className="friend-right">
-                                <p className="friend-name">{user.first} {user.last}</p>
-                            </div>
-                        </div>;
-                    }) }
+                <div className="new-users">
+                    {userToSearch === "" && <h1 className="friend-text">These people joined lately:</h1>}
+                    <div className="new-users-profiles">
+                        { users.map(user => {
+                            return <div className="friend" key={user.id}>
+                                <div className="friend-left">
+                                    <img
+                                        className = "friends-pic"
+                                        src = {user.imageurl}
+                                        alt = {user.first + user.last}
+                                    />
+                                </div>
+                                <div className="friend-right">
+                                    <p className="friend-name">{user.first} {user.last}</p>
+                                    <Link className="go-profile" to={`/user/${user.id}`}>Go to profile </Link>
+                                </div>
+                            </div>;
+                        }) }
+                    </div>
                 </div>
             </div>
         </div>

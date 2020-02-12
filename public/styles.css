@@ -263,6 +263,9 @@ img {
 
 .search {
     margin: 30px 0 0 50px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .search-text {
@@ -270,6 +273,26 @@ img {
     font-family: 'Monda', sans-serif;
     margin: 30px 0 30px 0;
     font-size: 20px;
+}
+
+.new-users {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.new-users-profiles {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.go-profile {
+    color: #ED1F34;
+    margin-left: 12px;
+    font-family: 'Monda', sans-serif;
+    font-size: 15px;
 }
 
 .friend-container {
