@@ -53,5 +53,14 @@ export default function reducer(state ={}, action) {
         };
     }
 
+    if (action.type === 'RECEIVE_USERS_FRIENDS') {
+
+        state = {
+            ...state,
+            usersFriends: action.usersFriends
+        };
+
+    }
+
     return state;
 }

@@ -389,10 +389,27 @@ app.get("/friends-status/:id", function (req, res) {
                     button: "End friendship"
                 });
             }
-
-
         }).catch(err => {
             console.log("error in get friend status: ", err);
+        });
+});
+
+app.get("/status/:id", function (req, res) {
+    console.log("req.params: ", req.params);
+    let loggedUser = req.session.userId;
+    let viewedUser =  req.params.id;
+    console.log("loggedUser", loggedUser);
+    console.log("viewedUser", viewedUser);
+    db.
+        getFriendsStatus(viewedUser, loggedUser)
+        .then(results => {
+            console.log("results from get status: ", results);
+            res.json({
+                results
+            });
+        })
+        .catch(err => {
+            console.log("error in get status: ", err);
         });
 });
 
@@ -463,6 +480,21 @@ app.get("/friends-wannabes", function(req, res) {
         });
 });
 
+
+app.get("/user-friends/:id", function(req, res) {
+    console.log("req.params: ", req.params);
+    let viewedUser =  req.params.id;
+    console.log("viewedUser: ", viewedUser);
+    db.
+        userFriends(viewedUser)
+        .then(results => {
+            console.log("results from user's friends", results.rows);
+            res.json({
+                results
+            });
+        });
+});
+
 app.get("/logout", (req, res) => {
     req.session = null;
     res.redirect("/welcome");
@@ -489,6 +521,7 @@ io.on('connection', function(socket) {
     }
 
     let userId = socket.request.session.userId;
+    console.log("connected userId: ", userId);
 
     socket.on("Chat message", msg => {
         console.log("message on server: ", msg);

@@ -67,6 +67,23 @@ export function chatMessage (msg) {
     console.log("msg: ", msg);
     return {
         type: "CHATMESSAGE",
-        chatMessage: msg 
+        chatMessage: msg
     };
+}
+
+export async function receiveUsersFriends(id) {
+
+
+    try {
+        console.log("action receiveUsersFriends taking place");
+        const {data} = await axios.get("/user-friends/" + id);
+        console.log("data", data.results.rows);
+        return {
+            type: 'RECEIVE_USERS_FRIENDS',
+            usersFriends: data.results.rows
+        };
+
+    } catch (err) {
+        console.log(err);
+    }
 }
