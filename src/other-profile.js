@@ -45,7 +45,7 @@ export default class OtherProfile extends React.Component {
     render() {
         return (
             <div className="profile-main">
-                <div className="profile-container">
+                <div className="other-profile-container">
                     <div className="ppcontainer">
                         <img
                             className = "pp"

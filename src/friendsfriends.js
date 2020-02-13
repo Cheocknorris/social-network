@@ -29,7 +29,7 @@ export const Friendsfriends = ({ id }) => {
 
     return (
         <div>
-            <div className="wannabes">
+            <div className="friends">
                 <h1 className="friend-text">Friends:</h1>
                 <div className="friend-container">
                     { usersFriends && usersFriends.map(usersFriend => {

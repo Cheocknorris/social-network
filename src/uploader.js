@@ -1,5 +1,6 @@
 import React from "react";
 import axios from "./axios";
+import { Link } from "react-router-dom";
 
 export default class Uploader extends React.Component {
     constructor(props) {
@@ -34,7 +35,7 @@ export default class Uploader extends React.Component {
         return (
             <div className="uploader-container">
                 <div className="uploader">
-
+                    <a className="close" href="/">x</a>
                     <h1 className="general-text">Do you want to upload a picture?</h1>
                     <form className="uploader-form">
                         <input className="inputfile" name="file" type="file" onChange={e => this.handleChange(e)}/>

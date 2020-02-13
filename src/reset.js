@@ -67,15 +67,15 @@ export default class Reset extends React.Component {
                 {this.state.step == 1 && <div className="reset">
                     <h2 className="general-text">Reset passowrd</h2>
                     <h3 className="general-text">Please enter the email address with which you registered</h3>
-                    <input className="general-field" name="email" placeholder="Email" onChange={e => this.handleChange(e)} />
+                    <input className="large-field" name="email" placeholder="Email" onChange={e => this.handleChange(e)} />
                     <button className="general-button" onClick={e => this.startReset()}> Submit </button>
                 </div>}
                 {this.state.step == 2 && <div className="reset">
                     <h2 className="general-text">Reset passowrd</h2>
                     <h3 className="general-text">Please enter the code you received</h3>
-                    <input className="general-field" name="secretCode" placeholder="Secret code" onChange={e => this.handleChange(e)} />
-                    <h3>Please enter a new password</h3>
-                    <input className="general-field" name="newPassword" placeholder="New password" type="password" onChange={e => this.handleChange(e)} />
+                    <input className="large-field" name="secretCode" placeholder="Secret code" onChange={e => this.handleChange(e)} />
+                    <h3 className="general-text">Please enter a new password</h3>
+                    <input className="large-field" name="newPassword" placeholder="New password" type="password" onChange={e => this.handleChange(e)} />
                     <button className="general-button" onClick={e => this.setNewPasswrord()}> Submit </button>
                 </div>}
                 {this.state.step == 3 && <div className="reset">

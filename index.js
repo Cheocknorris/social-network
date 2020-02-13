@@ -93,7 +93,7 @@ app.get('/user', function (req, res) {
                 first: results[0].first,
                 last: results[0].last,
                 email: results[0].email,
-                imageUrl: results[0].imageurl || '/public/skull.png',
+                imageUrl: results[0].imageurl || 'catrina.png',
                 bio: results[0].bio
             });
         })
