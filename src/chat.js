@@ -33,23 +33,31 @@ export default function Chat() {
 
     return (
         <div className="chat">
-            <h1> Chat room </h1>
+            <h1 className="chat-title"> Chat room </h1>
             <div className="chat-container" ref={elemRef}>
-                <ul>
+                <div>
                     { chatMessages && chatMessages.map(chatMessage => {
-                        return <li key={chatMessage.message_id}> <img
-                            className = "pp"
-                            src = {chatMessage.imageurl}
-                            alt = {chatMessage.first + chatMessage.last}
-                        /> {chatMessage.first} {chatMessage.last} {chatMessage.message}</li>;
+                        return <div className="chat-messages" key={chatMessage.message_id}>
+                            <div className="friend-left">
+                                <img
+                                    className = "chat-pic"
+                                    src = {chatMessage.imageurl}
+                                    alt = {chatMessage.first + chatMessage.last}
+                                />
+                            </div>
+                            <div className="friend-right">
+                                <p className="chat-name">{chatMessage.first} {chatMessage.last}:</p>
+                                <p className="chat-text">{chatMessage.message}</p>
+                            </div>
+                        </div>;
 
                     }) }
 
-                </ul>
+                </div>
             </div>
             <textarea
                 name="chat"
-                rows="5" cols="50"
+                rows="5" cols="70"
                 onKeyDown = { keyCheck }
             ></textarea>
         </div>

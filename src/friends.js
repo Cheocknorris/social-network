@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 // import axios from "./axios";
 import { useDispatch, useSelector } from 'react-redux';
 import { receiveFriendsWannabes, acceptFriendRequest, unfriend } from './actions';
+import { Link } from 'react-router-dom';
 
 export default function Friends() {
     const dispatch = useDispatch();
@@ -49,7 +50,7 @@ export default function Friends() {
                                 />
                             </div>
                             <div className="friend-right">
-                                <p className="friend-name">{wannaBe.first} {wannaBe.last}</p>
+                                <Link className="friend-name" to={`/user/${wannaBe.id}`}>{wannaBe.first} {wannaBe.last} </Link>
                                 <button className="friend-button" onClick={ e => dispatch(acceptFriendRequest(wannaBe.id)) }>Accept request</button>
                             </div>
                         </div>;
@@ -70,7 +71,7 @@ export default function Friends() {
                                 />
                             </div>
                             <div className="friend-right">
-                                <p className="friend-name">{friend.first} {friend.last}</p>
+                                <Link className="friend-name" to={`/user/${friend.id}`}>{friend.first} {friend.last} </Link>
                                 <button className="friend-button" onClick={ e => dispatch(unfriend(friend.id)) }>End friendship</button>
                             </div>
                         </div>;

@@ -34,10 +34,6 @@ export default class OtherProfile extends React.Component {
         // we want the server to send all info about requested user, and the id of the currently logged user.
         // If these are the same, we need to redirect to the /
 
-        //hard coded demo
-
-
-        // also redirect if user does not exist
     }
 
     render() {

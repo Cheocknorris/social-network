@@ -16,6 +16,7 @@ export default class Uploader extends React.Component {
         e.preventDefault();
         console.log("upload button clicked");
         console.log("imageUrl: ", this.state.file);
+        console.log("this.state: ", this.state);
         let formData = new FormData();
 
         formData.append("file", this.state.file);
@@ -31,14 +32,16 @@ export default class Uploader extends React.Component {
     }
     render() {
         return (
-            <div className="uploader">
-                
-                <h1 className="general-text">Do you want to upload a picture?</h1>
-                <form>
-                    <input className="inputfile" name="file" type="file" onChange={e => this.handleChange(e)}/>
+            <div className="uploader-container">
+                <div className="uploader">
 
-                    <button className="general-button" onClick={e => this.upload(e)}>Upload</button>
-                </form>
+                    <h1 className="general-text">Do you want to upload a picture?</h1>
+                    <form className="uploader-form">
+                        <input className="inputfile" name="file" type="file" onChange={e => this.handleChange(e)}/>
+
+                        <button className="pink-button" onClick={e => this.upload(e)}>Upload</button>
+                    </form>
+                </div>
             </div>
         );
     }
